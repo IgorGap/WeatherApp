@@ -8,6 +8,7 @@
 Необходимо скачать зависимости командой
 - npm install
 
+Посмотреть можно перейдя по ссылке https://igorgap.github.io/WeatherApp/
 Запустить командой 
 - npm start
 <br>
