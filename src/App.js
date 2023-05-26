@@ -5,10 +5,7 @@ import { Box, Button, Typography } from '@mui/material'
 import { City } from './components/City'
 import { NewCityModal } from './components/NewCityModal'
 import { useGetCurrentWeather } from './hooks/useGetCurrentWeather'
-import {
-  getCityWeather,
-  getWeatherForecast,
-} from './utils/utils'
+import { getCityWeather, getWeatherForecast } from './utils/utils'
 import { ForecastModal } from './components/ForecastModal'
 
 function App() {
@@ -50,7 +47,7 @@ function App() {
           padding: '10px',
           borderRadius: '10px',
           border: '2px solid gray',
-          backgroundColor: '#b2ebf2'
+          backgroundColor: '#b2ebf2',
         }}
       >
         <Typography variant="h4">Прогноз погоды</Typography>
@@ -63,33 +60,35 @@ function App() {
             description={currentPlace.currentWeather.weather[0].description}
           />
         )}
-        {cities.length ? (
-          cities.map((city, index) => (
-            <City
-              key={index}
-              name={city.name}
-              temp={city?.currentWeather?.main?.temp}
-              icon={city?.currentWeather?.weather[0]?.icon}
-              description={city?.currentWeather?.weather[0]?.description}
-              onDelete={() =>
-                setCities((prev) => prev.filter((c, ind) => ind !== index))
-              }
-              onClick={() => {
-                city?.currentWeather &&
-                  getWeatherForecast(
-                    city,
-                    apiKey,
-                    setCities,
-                    setWeatherForecast
-                  )
+        <Box sx={{ height: '320px', overflowY: 'scroll' }}>
+          {cities.length ? (
+            cities.map((city, index) => (
+              <City
+                key={index}
+                name={city.name}
+                temp={city?.currentWeather?.main?.temp}
+                icon={city?.currentWeather?.weather[0]?.icon}
+                description={city?.currentWeather?.weather[0]?.description}
+                onDelete={() =>
+                  setCities((prev) => prev.filter((c, ind) => ind !== index))
+                }
+                onClick={() => {
+                  city?.currentWeather &&
+                    getWeatherForecast(
+                      city,
+                      apiKey,
+                      setCities,
+                      setWeatherForecast
+                    )
                   setClickedCity(index)
                   setIsForecastModalOpen(true)
-              }}
-            />
-          ))
-        ) : (
-          <></>
-        )}
+                }}
+              />
+            ))
+          ) : (
+            <></>
+          )}
+        </Box>
         <Button
           onClick={() => setIsCityModalOpen(true)}
           startIcon={<AddCircle />}
@@ -106,15 +105,17 @@ function App() {
           }}
         />
       </Box>
-      {weatherForecast && <ForecastModal
-        city={cities.find((el, ind) => ind === clickedCity)}
-        weatherForecast={weatherForecast}
-        isOpen={isForecastModalOpen}
-        onClose={() => {
-          setClickedCity(null)
-          setWeatherForecast(null)
-        }}
-      />}
+      {weatherForecast && (
+        <ForecastModal
+          city={cities.find((el, ind) => ind === clickedCity)}
+          weatherForecast={weatherForecast}
+          isOpen={isForecastModalOpen}
+          onClose={() => {
+            setClickedCity(null)
+            setWeatherForecast(null)
+          }}
+        />
+      )}
     </Box>
   )
 }
