@@ -43,7 +43,7 @@ export const City = ({ name, temp, onDelete, onClick, icon, description }) => {
           </Stack>
         )}
         <Stack direction="row" gap={1} alignItems="center">
-          {temp && <Stack>{tempCelsius}</Stack>}
+          {temp && <Stack>+{tempCelsius}°С</Stack>}
           {icon && (
             <>
               <Stack width={50} height={50}>

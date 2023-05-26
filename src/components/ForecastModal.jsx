@@ -39,7 +39,7 @@ export const ForecastModal = ({ isOpen, onClose, city, weatherForecast }) => {
               Сегодня({dateFormat}.{dateFormatM + 1}){' '}
             </Typography>
             <Stack direction="row" gap={1} alignItems="center">
-              {today.temp && <Stack>{tempCelsiusToday}</Stack>}
+              {today.temp && <Stack>+{tempCelsiusToday}°С</Stack>}
               {today.weather[0].icon && (
                 <>
                   <Stack width={50} height={50}>
@@ -72,7 +72,7 @@ export const ForecastModal = ({ isOpen, onClose, city, weatherForecast }) => {
               Завтра ({dateFormat + 1}.{dateFormatM + 1})
             </Typography>
             <Stack direction="row" gap={1} alignItems="center">
-              {tomorrow.temp && <Stack>{tempCelsiusTomorrow}</Stack>}
+              {tomorrow.temp && <Stack>+{tempCelsiusTomorrow}°С</Stack>}
               {tomorrow.weather[0].icon && (
                 <>
                   <Stack width={50} height={50}>
